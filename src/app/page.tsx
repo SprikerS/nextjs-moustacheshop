@@ -1,4 +1,4 @@
-import { ThemeToggle } from '@/components'
+import { ThemeToggle } from '@/components/ui'
 
 export default function Home() {
   return (

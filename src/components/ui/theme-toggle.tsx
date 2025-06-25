@@ -3,7 +3,7 @@
 import { MoonIcon, SunIcon } from '@radix-ui/react-icons'
 import { useTheme } from 'next-themes'
 
-import { Button } from '@/components'
+import { Button } from '@/components/ui'
 
 const ThemeToggle = () => {
   const { theme, setTheme } = useTheme()
