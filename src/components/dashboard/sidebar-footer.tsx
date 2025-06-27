@@ -1,9 +1,9 @@
 'use client'
 
-import { signOut } from 'next-auth/react'
 import type { Session } from 'next-auth'
 
 import { Bell, ChevronsUpDown, CreditCard, LogOut, Sparkles } from 'lucide-react'
+import { clearAccessToken } from '@/actions/logout'
 import {
   Avatar,
   AvatarFallback,
@@ -30,7 +30,7 @@ export function FooterSidebar({ user }: { user: Session['user'] }) {
     .join('')
 
   const handleLogout = async () => {
-    await signOut({ redirectTo: '/' })
+    await clearAccessToken()
   }
 
   return (
