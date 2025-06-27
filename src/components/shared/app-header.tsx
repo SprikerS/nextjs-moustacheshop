@@ -27,7 +27,7 @@ export function AppHeader() {
           <BreadcrumbList>
             {segments.map((segment, index) => (
               <React.Fragment key={index}>
-                <BreadcrumbItem className="hidden md:block">
+                <BreadcrumbItem>
                   {segment.href ? (
                     <BreadcrumbLink asChild>
                       <Link href={segment.href}>{segment.label}</Link>
@@ -36,7 +36,7 @@ export function AppHeader() {
                     <BreadcrumbPage>{segment.label}</BreadcrumbPage>
                   )}
                 </BreadcrumbItem>
-                {index < segments.length - 1 && <BreadcrumbSeparator className="hidden md:block" />}
+                {index < segments.length - 1 && <BreadcrumbSeparator />}
               </React.Fragment>
             ))}
           </BreadcrumbList>
