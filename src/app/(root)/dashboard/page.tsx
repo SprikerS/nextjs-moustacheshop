@@ -1,18 +1,7 @@
-import { currentSessionUser } from '@/lib/auth'
-import { ButtonLogout } from './button-logout'
-
-const DashboardPage = async () => {
-  const user = await currentSessionUser()
-  if (!user) return null
-
+export default function DashboardPage() {
   return (
-    <div className="grid min-h-dvh place-items-center">
-      <div className="flex flex-col gap-5">
-        <h1>Hello {user.names} 🎉</h1>
-        <ButtonLogout />
-      </div>
-    </div>
+    <>
+      <h1>Dashboard</h1>
+    </>
   )
 }
-
-export default DashboardPage
