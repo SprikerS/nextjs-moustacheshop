@@ -26,7 +26,7 @@ export function Header() {
       <div className="container mx-auto p-5">
         <div className="flex justify-between items-center">
           <Link href="/">
-            <span className="font-semibold">🛠 Moustache Shop</span>
+            <span className="font-semibold">🛠 Cheap Store</span>
           </Link>
           <div className="flex space-x-1 h-5 items-center text-muted-foreground">
             <IconButton href="https://github.com/SprikerS" name="github" />

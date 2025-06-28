@@ -31,7 +31,7 @@ const LoginForm = () => {
   }
 
   return (
-    <CardWrapper title="Login to your account" description="Enter your email below to login to your account">
+    <CardWrapper title="Inicia sesión en tu cuenta" description="Ingrese sus datos para continuar">
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)}>
           <div className="flex flex-col gap-6">
@@ -40,7 +40,7 @@ const LoginForm = () => {
               name="email"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Email</FormLabel>
+                  <FormLabel>Correo electrónico</FormLabel>
                   <FormControl>
                     <Input type="email" placeholder="m@example.com" {...field} />
                   </FormControl>
@@ -53,7 +53,7 @@ const LoginForm = () => {
               name="password"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Password</FormLabel>
+                  <FormLabel>Contraseña</FormLabel>
                   <FormControl>
                     <Input type="password" placeholder="••••••••" {...field} />
                   </FormControl>
@@ -61,7 +61,7 @@ const LoginForm = () => {
                 </FormItem>
               )}
             />
-            <Button type="submit">Login</Button>
+            <Button type="submit">Iniciar sesión</Button>
           </div>
         </form>
       </Form>

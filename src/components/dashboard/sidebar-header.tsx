@@ -15,7 +15,7 @@ export function HeaderSidebar() {
             <div className="bg-sidebar-primary text-sidebar-primary-foreground flex aspect-square size-8 items-center justify-center rounded-lg">
               <LayoutDashboard className="size-4" />
             </div>
-            <span className="truncate font-medium">Moustache Shop</span>
+            <span className="truncate font-medium">Cheap Store</span>
           </Link>
         </SidebarMenuButton>
       </SidebarMenuItem>
