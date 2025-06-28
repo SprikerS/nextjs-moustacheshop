@@ -1,4 +1,4 @@
-import getCategories from '@/actions/categories'
+import { getCategories } from '@/actions/categories'
 
 export default async function CategoriesPage() {
   const categories = await getCategories()
