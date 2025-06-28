@@ -18,7 +18,7 @@ export const post = async (path: string, data: FormData | object) => {
   const body = data instanceof FormData ? Object.fromEntries(data) : data
   const headers = await getHeaders()
 
-  const res = await fetch(`${API_URL}/${path}`, {
+  const res = await fetch(`${API_URL}/api/${path}`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json', ...headers },
     body: JSON.stringify(body),
