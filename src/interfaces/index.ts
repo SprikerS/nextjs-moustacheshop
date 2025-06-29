@@ -1,9 +1,17 @@
-interface Category {
+export interface PaginatedResponse<T> {
+  data: T[]
+  total: number
+  limit: number
+  offset: number
+  hasMore: boolean
+}
+
+export interface Category {
   id: string
   name: string
 }
 
-interface Product {
+export interface Product {
   id: string
   name: string
   price: number
@@ -12,5 +20,3 @@ interface Product {
   category?: Category
   description?: string
 }
-
-export type { Category, Product }

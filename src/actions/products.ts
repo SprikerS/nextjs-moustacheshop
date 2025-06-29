@@ -1,7 +1,7 @@
 'use server'
 
 import { get, post } from '@/lib/http'
-import { Product } from '@/interfaces'
+import { PaginatedResponse, Product } from '@/interfaces'
 import { ProductFormValues } from '@/schemas'
 
 export async function createProduct(values: ProductFormValues) {
@@ -18,5 +18,5 @@ export async function createProduct(values: ProductFormValues) {
 }
 
 export async function AllProducts() {
-  return get<Product[]>('products')
+  return get<PaginatedResponse<Product>>('products')
 }
