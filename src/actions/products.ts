@@ -1,8 +1,11 @@
 'use server'
 
+import { revalidateTag } from 'next/cache'
+
 import { get, post } from '@/lib/http'
 import { PaginatedResponse, Product } from '@/interfaces'
 import { ProductFormValues } from '@/schemas'
+import type { SearchParams } from '@/components/shared/table'
 
 export async function createProduct(values: ProductFormValues) {
   const payload = {
@@ -17,6 +20,16 @@ export async function createProduct(values: ProductFormValues) {
   return await post('products', payload)
 }
 
-export async function AllProducts() {
-  return get<PaginatedResponse<Product>>('products')
+export async function revalidateProducts() {
+  revalidateTag('products')
+}
+
+export async function findAllProducts({ search, limit, page }: SearchParams) {
+  const params = new URLSearchParams({
+    search: search.toString(),
+    limit: limit.toString(),
+    offset: ((page - 1) * limit).toString(),
+  })
+
+  return get<PaginatedResponse<Product>>('products', ['products'], params)
 }

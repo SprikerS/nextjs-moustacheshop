@@ -34,7 +34,7 @@ import {
   PopoverTrigger,
 } from '@/components/ui'
 import { Category } from '@/interfaces'
-import { createProduct } from '@/actions/products'
+import { PRODUCT_ACTIONS } from '@/actions'
 import { ProductFormValues, ProductSchema } from '@/schemas'
 
 export function NewProductForm({ categories }: { categories: Category[] }) {
@@ -55,7 +55,7 @@ export function NewProductForm({ categories }: { categories: Category[] }) {
 
   async function onSubmit(data: ProductFormValues) {
     startTransition(async () => {
-      const res = await createProduct(data)
+      const res = await PRODUCT_ACTIONS.create(data)
 
       if (res.error) {
         toast.error('Error al crear el producto', {
