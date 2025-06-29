@@ -5,7 +5,7 @@ import { revalidateTag } from 'next/cache'
 import { get, post } from '@/lib/http'
 import { PaginatedResponse, Product } from '@/interfaces'
 import { ProductFormValues } from '@/schemas'
-import type { SearchParams } from '@/components/shared/table'
+import { SearchParams } from '@/constants'
 
 export async function createProduct(values: ProductFormValues) {
   const payload = {
