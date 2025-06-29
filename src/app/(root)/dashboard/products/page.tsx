@@ -1,11 +1,12 @@
 import Link from 'next/link'
+import { Suspense } from 'react'
 
 import { PackagePlus } from 'lucide-react'
 import type { SearchParams } from 'nuqs/server'
 
 import { PRODUCT_ACTIONS } from '@/actions'
-import { ProductsTable } from '@/components/products'
-import { TableFilter, TablePagination } from '@/components/shared/table'
+import { ProductsTable, ProductsTableLoading } from '@/components/products'
+import { TableFilter } from '@/components/shared/table'
 import { Button, Card, CardContent } from '@/components/ui'
 import { loadSearchParams } from '@/constants'
 
@@ -15,7 +16,6 @@ type PageProps = {
 
 export default async function ProductsPage({ searchParams }: PageProps) {
   const params = await loadSearchParams(searchParams)
-  const { data, total } = await PRODUCT_ACTIONS.findAll(params)
 
   return (
     <div className="flex flex-col gap-5">
@@ -30,9 +30,9 @@ export default async function ProductsPage({ searchParams }: PageProps) {
             </Link>
           </TableFilter>
 
-          <ProductsTable products={data} />
-
-          <TablePagination refetch={PRODUCT_ACTIONS.revalidate} total={total} />
+          <Suspense fallback={<ProductsTableLoading />}>
+            <ProductsTable params={params} />
+          </Suspense>
         </CardContent>
       </Card>
     </div>
