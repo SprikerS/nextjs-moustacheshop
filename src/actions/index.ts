@@ -1,6 +1,6 @@
 import {
   createProduct,
-  deleteProdcut,
+  deleteProduct,
   findAllProducts,
   findOneProduct,
   revalidateProducts,
@@ -9,7 +9,7 @@ import {
 
 export const PRODUCT_ACTIONS = {
   create: createProduct,
-  delete: deleteProdcut,
+  delete: deleteProduct,
   findAll: findAllProducts,
   findOneById: findOneProduct,
   revalidate: revalidateProducts,

@@ -51,6 +51,6 @@ export async function findOneProduct(id: string) {
   return await getSafe<Product>(`products/${id}`)
 }
 
-export async function deleteProdcut(id: string) {
+export async function deleteProduct(id: string) {
   return await del(`products/${id}`)
 }

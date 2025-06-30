@@ -3,7 +3,7 @@ import { Table, TableBody, TableHead, TableHeader, TableRow } from '@/components
 import { PRODUCT_ACTIONS } from '@/actions'
 import { TablePagination } from '@/components/shared/table'
 import { SearchParams } from '@/constants'
-import { ProductRow } from './products-table-row'
+import { ProductRow } from './product-row'
 
 interface Props {
   params: SearchParams
