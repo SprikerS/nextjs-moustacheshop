@@ -5,7 +5,7 @@ import { revalidateTag } from 'next/cache'
 import { del, get, getSafe, patch, post } from '@/lib/http'
 import { PaginatedResponse, Product } from '@/interfaces'
 import { ProductFormValues } from '@/schemas'
-import { SearchParams } from '@/constants'
+import { ProductSearchParams } from '@/components/products'
 
 export async function createProduct(values: ProductFormValues) {
   const payload = {
@@ -37,12 +37,15 @@ export async function revalidateProducts() {
   revalidateTag('products')
 }
 
-export async function findAllProducts({ search, limit, page }: SearchParams) {
+export async function findAllProducts({ search, limit, page, category, active }: ProductSearchParams) {
   const params = new URLSearchParams({
     search: search.toString(),
+    category: category.toString(),
     limit: limit.toString(),
     offset: ((page - 1) * limit).toString(),
   })
+
+  if (typeof active === 'boolean') params.set('active', active.toString())
 
   return get<PaginatedResponse<Product>>('products', ['products'], params)
 }
