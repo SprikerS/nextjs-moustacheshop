@@ -21,8 +21,9 @@ export function TableFilter({ children, placeholder, refetch }: TableFilterProps
 
   return (
     <>
-      <div className="flex justify-between">
+      <div className="flex justify-between gap-6">
         <Input
+          name="search"
           placeholder={placeholder || 'Buscar...'}
           value={search}
           onChange={e => handleSearch(e.target.value)}
