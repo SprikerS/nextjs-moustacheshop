@@ -4,7 +4,7 @@ import { Suspense } from 'react'
 import { PackagePlus } from 'lucide-react'
 import type { SearchParams } from 'nuqs/server'
 
-import { CATEGORY_ACTIONS, PRODUCT_ACTIONS } from '@/actions'
+import { PRODUCT_ACTIONS, CATEGORY_ACTIONS } from '@/actions'
 import { productSearchParams, ProductsTable, ProductsTableLoading } from '@/components/products'
 import { TableFacetedFilter, TableFilter } from '@/components/shared/table'
 import { Button, Card, CardContent } from '@/components/ui'
