@@ -4,9 +4,9 @@ import { Suspense } from 'react'
 import { PackagePlus, RotateCcw } from 'lucide-react'
 import type { SearchParams } from 'nuqs/server'
 
-import { PRODUCT_ACTIONS, CATEGORY_ACTIONS } from '@/actions'
+import { CATEGORY_ACTIONS, PRODUCT_ACTIONS } from '@/actions'
 import { productSearchParams, ProductsTable, ProductsTableLoading } from '@/components/products'
-import { TableFacetedFilter, TableFilter } from '@/components/shared/table'
+import { TableFacetedFilter, TableFilter, TableToggleFilter } from '@/components/shared/table'
 import { Button, Card, CardContent } from '@/components/ui'
 
 type PageProps = {
@@ -28,6 +28,7 @@ export default async function ProductsPage({ searchParams }: PageProps) {
                 refetch={PRODUCT_ACTIONS.revalidate}
               />
               <TableFacetedFilter categories={categories} refetch={PRODUCT_ACTIONS.revalidate} />
+              <TableToggleFilter refetch={PRODUCT_ACTIONS.revalidate} />
             </div>
             <div className="flex items-center gap-3">
               <Link href="/dashboard/products">
