@@ -61,7 +61,7 @@ export function TableFacetedFilter({ categories, refetch }: TableTestProps) {
           <CommandInput placeholder="Buscar..." />
           <CommandList>
             <CommandEmpty>Sin resultados</CommandEmpty>
-            <CommandGroup className="caca flex flex-col gap-10">
+            <CommandGroup className="flex flex-col gap-10">
               {categories.map(c => (
                 <CommandItem
                   key={c.id}
