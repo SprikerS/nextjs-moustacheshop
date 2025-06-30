@@ -1,5 +1,7 @@
 'use client'
 
+import { PRODUCT_ACTIONS } from '@/actions'
+import { DeleteConfirmDialog } from '@/components/shared'
 import { Badge, Button, Icons, TableCell, TableRow } from '@/components/ui'
 import { Product } from '@/interfaces'
 import { Loader, PackageX, SquarePen } from 'lucide-react'
@@ -30,9 +32,11 @@ export function ProductRow({ product }: ProductRow) {
           <Button size="icon" variant="ghost" className="size-8" onClick={() => console.log('Edit product', id)}>
             <SquarePen />
           </Button>
-          <Button size="icon" variant="ghost" className="size-8" onClick={() => console.log('Delete product', id)}>
-            <PackageX />
-          </Button>
+          <DeleteConfirmDialog id={id} label="producto" action={PRODUCT_ACTIONS.delete}>
+            <Button size="icon" variant="ghost" className="size-8">
+              <PackageX />
+            </Button>
+          </DeleteConfirmDialog>
         </TableCell>
       </TableRow>
     </>

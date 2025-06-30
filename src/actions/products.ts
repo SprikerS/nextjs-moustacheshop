@@ -2,7 +2,7 @@
 
 import { revalidateTag } from 'next/cache'
 
-import { get, post } from '@/lib/http'
+import { del, get, post } from '@/lib/http'
 import { PaginatedResponse, Product } from '@/interfaces'
 import { ProductFormValues } from '@/schemas'
 import { SearchParams } from '@/constants'
@@ -32,4 +32,8 @@ export async function findAllProducts({ search, limit, page }: SearchParams) {
   })
 
   return get<PaginatedResponse<Product>>('products', ['products'], params)
+}
+
+export async function deleteProdcut(id: string) {
+  return await del(`products/${id}`)
 }
