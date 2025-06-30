@@ -8,6 +8,7 @@ export interface PaginatedResponse<T> {
 export interface Category {
   id: string
   name: string
+  productsCount?: number
 }
 
 export interface Product {
