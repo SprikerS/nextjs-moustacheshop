@@ -1,15 +1,10 @@
 import { Table, TableBody, TableHead, TableHeader, TableRow } from '@/components/ui'
 
 import { PRODUCT_ACTIONS } from '@/actions'
+import { ProductRow, ProductSearchParams } from '@/components/products'
 import { TablePagination } from '@/components/shared/table'
-import { SearchParams } from '@/constants'
-import { ProductRow } from './product-row'
 
-interface Props {
-  params: SearchParams
-}
-
-export async function ProductsTable({ params }: Props) {
+export async function ProductsTable({ params }: { params: ProductSearchParams }) {
   const { data, total } = await PRODUCT_ACTIONS.findAll(params)
 
   return (
