@@ -1,4 +1,4 @@
-'use client'
+import Link from 'next/link'
 
 import { PRODUCT_ACTIONS } from '@/actions'
 import { DeleteConfirmDialog } from '@/components/shared'
@@ -29,9 +29,11 @@ export function ProductRow({ product }: ProductRow) {
           </Badge>
         </TableCell>
         <TableCell>
-          <Button size="icon" variant="ghost" className="size-8" onClick={() => console.log('Edit product', id)}>
-            <SquarePen />
-          </Button>
+          <Link href={`/dashboard/products/${id}`}>
+            <Button size="icon" variant="ghost" className="size-8">
+              <SquarePen />
+            </Button>
+          </Link>
           <DeleteConfirmDialog id={id} label="producto" action={PRODUCT_ACTIONS.delete}>
             <Button size="icon" variant="ghost" className="size-8">
               <PackageX />
