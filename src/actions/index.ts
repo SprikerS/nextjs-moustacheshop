@@ -1,8 +1,17 @@
-import { createProduct, deleteProdcut, findAllProducts, revalidateProducts } from './products'
+import {
+  createProduct,
+  deleteProdcut,
+  findAllProducts,
+  findOneProduct,
+  revalidateProducts,
+  updateProduct,
+} from './products'
 
 export const PRODUCT_ACTIONS = {
-  findAll: findAllProducts,
   create: createProduct,
-  revalidate: revalidateProducts,
   delete: deleteProdcut,
+  findAll: findAllProducts,
+  findOneById: findOneProduct,
+  revalidate: revalidateProducts,
+  update: updateProduct,
 }
