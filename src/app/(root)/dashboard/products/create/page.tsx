@@ -1,8 +1,8 @@
-import { getCategories } from '@/actions/categories'
+import { CATEGORY_ACTIONS } from '@/actions'
 import { ProductForm } from '@/components/products'
 
 export default async function ProductCreatePage() {
-  const categories = await getCategories()
+  const categories = await CATEGORY_ACTIONS.findAll()
 
   return (
     <>

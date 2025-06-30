@@ -1,7 +1,7 @@
-import { getCategories } from '@/actions/categories'
+import { CATEGORY_ACTIONS } from '@/actions'
 
 export default async function CategoriesPage() {
-  const categories = await getCategories()
+  const categories = await CATEGORY_ACTIONS.findAll()
 
   return (
     <>

@@ -1,7 +1,6 @@
 import { redirect } from 'next/navigation'
 
-import { PRODUCT_ACTIONS } from '@/actions'
-import { getCategories } from '@/actions/categories'
+import { CATEGORY_ACTIONS, PRODUCT_ACTIONS } from '@/actions'
 import { ProductForm } from '@/components/products'
 
 interface EditProductPageProps {
@@ -9,7 +8,7 @@ interface EditProductPageProps {
 }
 
 export default async function EditProductPage({ params }: EditProductPageProps) {
-  const categories = await getCategories()
+  const categories = await CATEGORY_ACTIONS.findAll()
   const { data, error } = await PRODUCT_ACTIONS.findOneById(params.id)
   if (!data || error) {
     redirect('/dashboard/products')

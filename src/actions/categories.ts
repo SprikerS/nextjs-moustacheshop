@@ -3,6 +3,6 @@
 import { Category } from '@/interfaces'
 import { get } from '@/lib/http'
 
-export async function getCategories() {
+export async function findAllCategories() {
   return get<Category[]>('categories')
 }
