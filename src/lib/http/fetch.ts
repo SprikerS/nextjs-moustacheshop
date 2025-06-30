@@ -44,6 +44,23 @@ export const get = async <T>(path: string, tags?: string[], params?: URLSearchPa
   return res.json() as T
 }
 
+export const getSafe = async <T>(path: string, tags?: string[], params?: URLSearchParams) => {
+  const headers = await getHeaders()
+  const url = params ? `${API_URL}/api/${path}?${params.toString()}` : `${API_URL}/api/${path}`
+
+  const res = await fetch(url, {
+    headers,
+    next: { tags },
+  })
+
+  const parsedRes = await res.json()
+  if (!res.ok) {
+    return { error: getErrorMessage(parsedRes), data: null }
+  }
+
+  return { error: '', data: parsedRes as T }
+}
+
 export const patch = async (path: string, data: FormData | object) => {
   const body = data instanceof FormData ? Object.fromEntries(data) : data
   const headers = await getHeaders()
