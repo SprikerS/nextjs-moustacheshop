@@ -1,12 +1,12 @@
 import { getCategories } from '@/actions/categories'
-import { NewProductForm } from './_components/form'
+import { ProductForm } from '@/components/products'
 
 export default async function ProductCreatePage() {
   const categories = await getCategories()
 
   return (
     <>
-      <NewProductForm categories={categories} />
+      <ProductForm categories={categories} />
     </>
   )
 }

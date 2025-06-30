@@ -24,6 +24,7 @@ import {
   CommandList,
   Form,
   FormControl,
+  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -32,39 +33,48 @@ import {
   Popover,
   PopoverContent,
   PopoverTrigger,
+  Switch,
 } from '@/components/ui'
-import { Category } from '@/interfaces'
+
+import { Category, Product } from '@/interfaces'
 import { PRODUCT_ACTIONS } from '@/actions'
 import { ProductFormValues, ProductSchema } from '@/schemas'
 
-export function NewProductForm({ categories }: { categories: Category[] }) {
+interface NewProductFormProps {
+  categories: Category[]
+  product?: Product
+}
+
+export function ProductForm({ categories, product }: NewProductFormProps) {
   const [open, setOpen] = useState(false)
   const [isPending, startTransition] = useTransition()
 
   const form = useForm<ProductFormValues>({
     resolver: zodResolver(ProductSchema),
     defaultValues: {
-      name: '',
-      price: '',
-      stock: '',
-      active: true,
-      category: '',
-      description: '',
+      name: product?.name ?? '',
+      price: String(product?.price ?? ''),
+      stock: String(product?.stock ?? ''),
+      active: product?.active ?? true,
+      category: product?.category?.id ?? '',
+      description: product?.description ?? '',
     },
   })
 
   async function onSubmit(data: ProductFormValues) {
     startTransition(async () => {
-      const res = await PRODUCT_ACTIONS.create(data)
+      const isEdit = !!product
+      const res = isEdit ? await PRODUCT_ACTIONS.update(product.id, data) : await PRODUCT_ACTIONS.create(data)
 
       if (res.error) {
-        toast.error('Error al crear el producto', {
+        toast.error(`Error al ${isEdit ? 'actualizar' : 'crear'} el producto`, {
           description: res.error,
         })
-      } else {
-        toast.success('Producto creado exitosamente')
-        redirect('/dashboard/products')
+        return
       }
+
+      toast[isEdit ? 'info' : 'success'](`Producto ${isEdit ? 'actualizado' : 'creado'} exitosamente`)
+      redirect('/dashboard/products')
     })
   }
 
@@ -189,6 +199,24 @@ export function NewProductForm({ categories }: { categories: Category[] }) {
                   )}
                 />
               </div>
+
+              {product && (
+                <FormField
+                  control={form.control}
+                  name="active"
+                  render={({ field }) => (
+                    <FormItem className="flex flex-row items-center justify-between rounded-lg border p-3 shadow-sm">
+                      <div className="space-y-0.5">
+                        <FormLabel>Estado</FormLabel>
+                        <FormDescription>Controla si el producto sera visible en la tienda</FormDescription>
+                      </div>
+                      <FormControl>
+                        <Switch checked={field.value} onCheckedChange={field.onChange} />
+                      </FormControl>
+                    </FormItem>
+                  )}
+                />
+              )}
             </div>
           </CardContent>
           <CardFooter>
@@ -198,6 +226,8 @@ export function NewProductForm({ categories }: { categories: Category[] }) {
                   <Loader2Icon className="animate-spin" />
                   Cargando...
                 </>
+              ) : product ? (
+                'Actualizar producto'
               ) : (
                 'Crear producto'
               )}
