@@ -1,8 +1,9 @@
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui'
+import { Table, TableBody, TableHead, TableHeader, TableRow } from '@/components/ui'
 
 import { PRODUCT_ACTIONS } from '@/actions'
 import { TablePagination } from '@/components/shared/table'
 import { SearchParams } from '@/constants'
+import { ProductRow } from './products-table-row'
 
 interface Props {
   params: SearchParams
@@ -20,25 +21,16 @@ export async function ProductsTable({ params }: Props) {
             <TableHead>Precio</TableHead>
             <TableHead>Stock</TableHead>
             <TableHead>Descripción</TableHead>
-            <TableHead>Estado</TableHead>
             <TableHead>Categoría</TableHead>
+            <TableHead className="w-[100px] text-center">Estado</TableHead>
+            <TableHead className="w-16 text-center"></TableHead>
           </TableRow>
         </TableHeader>
-        <TableBody>
-          {data.map(product => {
-            const category = product.category ? product.category.name : null
 
-            return (
-              <TableRow key={product.id}>
-                <TableCell>{product.name}</TableCell>
-                <TableCell>{product.price}</TableCell>
-                <TableCell>{product.stock}</TableCell>
-                <TableCell>{product.description}</TableCell>
-                <TableCell>{product.active ? 'Activo' : 'Inactivo'}</TableCell>
-                <TableCell>{category}</TableCell>
-              </TableRow>
-            )
-          })}
+        <TableBody>
+          {data.map(product => (
+            <ProductRow key={product.id} product={product} />
+          ))}
         </TableBody>
       </Table>
 
