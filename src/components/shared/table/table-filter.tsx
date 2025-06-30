@@ -24,7 +24,7 @@ export function TableFilter({ placeholder, refetch }: TableFilterProps) {
       placeholder={placeholder || 'Buscar...'}
       value={search}
       onChange={e => handleSearch(e.target.value)}
-      className="max-w-sm"
+      className="max-w-xs"
     />
   )
 }
