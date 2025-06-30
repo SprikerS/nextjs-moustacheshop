@@ -43,3 +43,37 @@ export const get = async <T>(path: string, tags?: string[], params?: URLSearchPa
 
   return res.json() as T
 }
+
+export const patch = async (path: string, data: FormData | object) => {
+  const body = data instanceof FormData ? Object.fromEntries(data) : data
+  const headers = await getHeaders()
+
+  const res = await fetch(`${API_URL}/api/${path}`, {
+    method: 'PATCH',
+    headers: { 'Content-Type': 'application/json', ...headers },
+    body: JSON.stringify(body),
+  })
+
+  const parsedRes = await res.json()
+  if (!res.ok) {
+    return { error: getErrorMessage(parsedRes) }
+  }
+
+  return { error: '', data: parsedRes }
+}
+
+export const del = async (path: string) => {
+  const headers = await getHeaders()
+
+  const res = await fetch(`${API_URL}/api/${path}`, {
+    method: 'DELETE',
+    headers,
+  })
+
+  if (!res.ok) {
+    const parsedRes = await res.json()
+    return { error: getErrorMessage(parsedRes) }
+  }
+
+  return { error: '' }
+}
