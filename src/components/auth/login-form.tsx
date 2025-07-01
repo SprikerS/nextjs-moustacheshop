@@ -1,7 +1,7 @@
 'use client'
 
 import { zodResolver } from '@hookform/resolvers/zod'
-import { redirect } from 'next/navigation'
+import { useRouter, useSearchParams } from 'next/navigation'
 import { useForm } from 'react-hook-form'
 
 import { Button, Form, FormControl, FormField, FormItem, FormLabel, FormMessage, Input } from '@/components/ui'
@@ -12,6 +12,9 @@ import { CardWrapper } from '@/components/auth'
 import { LoginFormValues, LoginSchema } from '@/constants'
 
 const LoginForm = () => {
+  const searchParams = useSearchParams()
+  const router = useRouter()
+
   const form = useForm<LoginFormValues>({
     resolver: zodResolver(LoginSchema),
     defaultValues: {
@@ -29,7 +32,9 @@ const LoginForm = () => {
     }
 
     toast.success(`Inicio de sesión exitoso ${user.names}`)
-    redirect('/dashboard')
+
+    const callbackUrl = searchParams.get('callbackUrl') || '/dashboard'
+    router.push(callbackUrl)
   }
 
   return (
