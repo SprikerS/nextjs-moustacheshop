@@ -1,4 +1,4 @@
-import { Footer, Header } from '../page'
+import { Footer, Header } from '@/components/shared'
 
 export default function AuthLayout({ children }: { children: React.ReactNode }) {
   return (
