@@ -8,7 +8,6 @@ import { getUserAuthentication } from '@/lib/session'
 
 export default async function AppPage() {
   const user = await getUserAuthentication()
-  if (!user) return null
 
   return (
     <div className="grid min-h-dvh grid-rows-[auto_1fr_auto]">
