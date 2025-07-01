@@ -17,7 +17,11 @@ export interface User {
   phoneNumber?: number
   active: boolean
   roles: Role[]
-  token: string
+}
+
+export interface JwtToken extends User {
+  iat: number
+  exp: number
 }
 
 export interface Category {
