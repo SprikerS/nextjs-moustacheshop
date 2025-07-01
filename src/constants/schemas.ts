@@ -1,28 +1,27 @@
-import * as zod from 'zod'
+import { z } from 'zod'
 
-const baseEmailSchema = zod
+const baseEmailSchema = z
   .string()
   .min(1, { message: 'Email cannot be empty' })
-  .trim()
   .toLowerCase()
   .email({ message: 'Invalid email address' })
   .max(62, { message: 'Email is too long' })
-
-const basePasswordSchema = zod
-  .string()
-  .min(1, { message: 'Password cannot be empty' })
   .trim()
-  .min(6, { message: 'Password must be at least 6 characters' })
-  .max(62, { message: 'Password is too long' })
-  .regex(/\S/, { message: 'Password cannot be only whitespaces' })
-  .transform(value => value.trim())
 
-export const LoginSchema = zod.object({
+const basePasswordSchema = z
+  .string()
+  .min(6, { message: 'Password must be at least 6 characters long.' })
+  .max(50, { message: 'Password must be at most 50 characters long.' })
+  .regex(/[A-Z]/, { message: 'Password must contain at least one uppercase letter.' })
+  .regex(/[a-z]/, { message: 'Password must contain at least one lowercase letter.' })
+  .regex(/[\d\W]/, {
+    message: 'Password must contain at least one number or special character.',
+  })
+  .trim()
+
+export const LoginSchema = z.object({
   email: baseEmailSchema,
   password: basePasswordSchema,
-  twoFactorCode: zod
-    .string()
-    .trim()
-    .regex(/^\d{6}$/, { message: 'Code must be 6 digits' })
-    .optional(),
 })
+
+export type LoginFormValues = z.infer<typeof LoginSchema>
