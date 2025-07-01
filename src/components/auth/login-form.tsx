@@ -1,20 +1,18 @@
 'use client'
 
-import { signIn } from 'next-auth/react'
-import { useForm } from 'react-hook-form'
-import { useSearchParams } from 'next/navigation'
-import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { redirect } from 'next/navigation'
+import { useForm } from 'react-hook-form'
 
 import { Button, Form, FormControl, FormField, FormItem, FormLabel, FormMessage, Input } from '@/components/ui'
+import { toast } from 'sonner'
+
+import { signIn } from '@/actions/auth'
 import { CardWrapper } from '@/components/auth'
-import { DEFAULT_LOGIN_REDIRECT, LoginSchema } from '@/constants'
+import { LoginFormValues, LoginSchema } from '@/constants'
 
 const LoginForm = () => {
-  const searchParams = useSearchParams()
-  const callbackUrl = searchParams.get('callbackUrl')
-
-  const form = useForm<z.infer<typeof LoginSchema>>({
+  const form = useForm<LoginFormValues>({
     resolver: zodResolver(LoginSchema),
     defaultValues: {
       email: '',
@@ -22,12 +20,16 @@ const LoginForm = () => {
     },
   })
 
-  async function onSubmit({ email, password }: z.infer<typeof LoginSchema>) {
-    await signIn('credentials', {
-      email,
-      password,
-      redirectTo: callbackUrl || DEFAULT_LOGIN_REDIRECT,
-    })
+  async function onSubmit(data: LoginFormValues) {
+    const { error, token } = await signIn(data)
+
+    if (error || !token) {
+      toast.error(error)
+      return
+    }
+
+    toast.success(`Inicio de sesión exitoso ${token.names}`)
+    redirect('/dashboard')
   }
 
   return (
