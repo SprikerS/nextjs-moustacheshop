@@ -1,14 +1,20 @@
 import { Table, TableBody, TableHead, TableHeader, TableRow } from '@/components/ui'
 
-import { PRODUCT_ACTIONS } from '@/actions'
+import { CATEGORY_ACTIONS, PRODUCT_ACTIONS } from '@/actions'
 import { ProductRow, ProductSearchParams } from '@/components/products'
-import { TablePagination } from '@/components/shared/table'
+import { TableFacetedFilter, TableFilter, TablePagination, TableToggleFilter } from '@/components/shared/table'
 
 export async function ProductsTable({ params }: { params: ProductSearchParams }) {
   const { data, total } = await PRODUCT_ACTIONS.findAll(params)
+  const categories = await CATEGORY_ACTIONS.findAll()
 
   return (
     <>
+      <TableFilter placeholder="Buscar producto por nombre o descripción" refetch={PRODUCT_ACTIONS.revalidate}>
+        <TableFacetedFilter categories={categories} refetch={PRODUCT_ACTIONS.revalidate} />
+        <TableToggleFilter refetch={PRODUCT_ACTIONS.revalidate} />
+      </TableFilter>
+
       <Table>
         <TableHeader>
           <TableRow>
