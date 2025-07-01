@@ -3,7 +3,7 @@
 import { jwtDecode } from 'jwt-decode'
 import { cookies } from 'next/headers'
 
-import { API_URL, LoginFormValues, LoginSchema } from '@/constants'
+import { API_URL, AUTHENTICATION_COOKIE, LoginFormValues, LoginSchema } from '@/constants'
 import { JwtToken } from '@/interfaces'
 import { getErrorMessage } from '@/lib/http'
 
@@ -27,7 +27,7 @@ export async function signIn(formData: LoginFormValues) {
 
     const cookieStore = await cookies()
     cookieStore.set({
-      name: 'access_token',
+      name: AUTHENTICATION_COOKIE,
       value: token,
       secure: process.env.NODE_ENV === 'production',
       httpOnly: true,
@@ -43,5 +43,5 @@ export async function signIn(formData: LoginFormValues) {
 
 export async function signOut() {
   const cookieStore = await cookies()
-  cookieStore.delete('access_token')
+  cookieStore.delete(AUTHENTICATION_COOKIE)
 }
