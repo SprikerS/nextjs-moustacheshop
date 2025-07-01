@@ -1,4 +1,5 @@
 export * from './app-header'
+export * from './app-layout'
 export * from './app-sidebar'
 export * from './delete-confirm-dialog'
 export * from './sign-out-button'
