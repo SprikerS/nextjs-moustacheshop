@@ -3,6 +3,15 @@ import { Skeleton, Table, TableBody, TableCell, TableHead, TableHeader, TableRow
 export function ProductsTableLoading() {
   return (
     <>
+      <div className="flex justify-between gap-6">
+        <div className="flex items-center gap-3 w-full">
+          <Skeleton className="h-9 w-[320px]" />
+          <Skeleton className="h-8 w-[106px]" />
+          <Skeleton className="h-8 w-[91px]" />
+        </div>
+        <Skeleton className="h-8 w-9" />
+      </div>
+
       <Table>
         <TableHeader>
           <TableRow>
