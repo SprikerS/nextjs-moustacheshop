@@ -5,20 +5,21 @@ import { useQueryState } from 'nuqs'
 
 import { Button, Input } from '@/components/ui'
 import { RotateCcw } from 'lucide-react'
+import { useTable } from './table-provider'
 
 interface TableFilterProps {
-  refetch: () => void
   placeholder?: string
   children?: React.ReactNode
 }
 
-export function TableFilter({ children, placeholder, refetch }: TableFilterProps) {
+export function TableFilter({ children, placeholder }: TableFilterProps) {
   const [search, setSearch] = useQueryState('search', { defaultValue: '' })
+  const { revalidate } = useTable()
 
   const handleSearch = (value: string) => {
     setSearch(value)
 
-    setTimeout(refetch, 300)
+    setTimeout(revalidate, 300)
   }
 
   return (

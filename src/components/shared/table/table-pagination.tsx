@@ -5,12 +5,15 @@ import { parseAsInteger, useQueryState } from 'nuqs'
 
 import { Button, Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui'
 
+import { useTable } from './table-provider'
+
 interface TablePaginationProps {
   total: number
-  refetch: () => void
 }
 
-export function TablePagination({ total, refetch }: TablePaginationProps) {
+export function TablePagination({ total }: TablePaginationProps) {
+  const { revalidate } = useTable()
+
   const [limit, setLimit] = useQueryState('limit', parseAsInteger.withDefault(10))
   const [page, setPage] = useQueryState('page', parseAsInteger.withDefault(1))
 
@@ -20,14 +23,14 @@ export function TablePagination({ total, refetch }: TablePaginationProps) {
     setLimit(Number(value))
     setPage(1)
 
-    setTimeout(refetch, 300)
+    setTimeout(revalidate, 300)
   }
 
   const goToPage = (newPage: number) => {
     const clamped = Math.max(1, Math.min(totalPages, newPage))
     setPage(clamped)
 
-    setTimeout(refetch, 300)
+    setTimeout(revalidate, 300)
   }
 
   return (

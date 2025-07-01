@@ -6,11 +6,11 @@ import { useState } from 'react'
 import { Badge, Button, Separator } from '@/components/ui'
 import { PlusCircle } from 'lucide-react'
 
-interface TableToggleFilterProps {
-  refetch: () => void
-}
+import { useTable } from './table-provider'
 
-export function TableToggleFilter({ refetch }: TableToggleFilterProps) {
+export function TableToggleFilter() {
+  const { revalidate } = useTable()
+
   const [active, setActive] = useQueryState<'true' | 'false' | null>('active', {
     parse: v => (v === 'true' || v === 'false' ? v : null),
     serialize: v => v ?? '',
@@ -29,7 +29,7 @@ export function TableToggleFilter({ refetch }: TableToggleFilterProps) {
     setLoading(true)
 
     setTimeout(() => {
-      refetch()
+      revalidate()
       setLoading(false)
     }, 300)
   }

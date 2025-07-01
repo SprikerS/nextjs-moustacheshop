@@ -21,13 +21,15 @@ import {
 import { PlusCircle } from 'lucide-react'
 
 import { Category } from '@/interfaces'
+import { useTable } from './table-provider'
 
 interface TableTestProps {
   categories: Category[]
-  refetch: () => void
 }
 
-export function TableFacetedFilter({ categories, refetch }: TableTestProps) {
+export function TableFacetedFilter({ categories }: TableTestProps) {
+  const { revalidate } = useTable()
+
   const [category, setCategory] = useQueryState('category', { defaultValue: '' })
   const [open, setOpen] = useState(false)
 
@@ -35,7 +37,7 @@ export function TableFacetedFilter({ categories, refetch }: TableTestProps) {
     setCategory(value === category ? '' : value)
     setOpen(false)
 
-    setTimeout(refetch, 300)
+    setTimeout(revalidate, 300)
   }
 
   return (
