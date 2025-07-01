@@ -1,11 +1,11 @@
 'use client'
 
 import * as React from 'react'
-import type { Session } from 'next-auth'
 
 import { Box, Tags, User } from 'lucide-react'
 import { Sidebar, SidebarContent, SidebarFooter, SidebarHeader, SidebarRail } from '@/components/ui'
 import { FooterSidebar, HeaderSidebar, SidebarModules } from '@/components/dashboard'
+import { User as UserSession } from '@/interfaces'
 
 const data = {
   modules: [
@@ -28,7 +28,7 @@ const data = {
 }
 
 interface AppSidebarProps extends React.ComponentProps<typeof Sidebar> {
-  user: Session['user']
+  user: UserSession
 }
 
 export function AppSidebar({ user, ...props }: AppSidebarProps) {

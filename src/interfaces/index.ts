@@ -17,9 +17,6 @@ export interface User {
   phoneNumber?: number
   active: boolean
   roles: Role[]
-}
-
-export interface JwtToken extends User {
   iat: number
   exp: number
 }

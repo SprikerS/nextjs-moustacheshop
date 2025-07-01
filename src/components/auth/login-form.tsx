@@ -21,14 +21,14 @@ const LoginForm = () => {
   })
 
   async function onSubmit(data: LoginFormValues) {
-    const { error, token } = await signIn(data)
+    const { error, user } = await signIn(data)
 
-    if (error || !token) {
+    if (error || !user) {
       toast.error(error)
       return
     }
 
-    toast.success(`Inicio de sesión exitoso ${token.names}`)
+    toast.success(`Inicio de sesión exitoso ${user.names}`)
     redirect('/dashboard')
   }
 

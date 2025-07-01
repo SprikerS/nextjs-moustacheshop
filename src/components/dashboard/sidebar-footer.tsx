@@ -1,9 +1,6 @@
 'use client'
 
-import type { Session } from 'next-auth'
-
 import { Bell, ChevronsUpDown, CreditCard, LogOut, Sparkles } from 'lucide-react'
-import { clearAccessToken } from '@/actions/logout'
 import {
   Avatar,
   AvatarFallback,
@@ -20,18 +17,16 @@ import {
   SidebarMenuItem,
   useSidebar,
 } from '@/components/ui'
+import { User } from '@/interfaces'
+import { signOut } from '@/actions/auth'
 
-export function FooterSidebar({ user }: { user: Session['user'] }) {
+export function FooterSidebar({ user }: { user: User }) {
   const { isMobile } = useSidebar()
 
   const userInitials = user.names
     .split(' ')
     .map(name => name.charAt(0).toUpperCase())
     .join('')
-
-  const handleLogout = async () => {
-    await clearAccessToken()
-  }
 
   return (
     <SidebarMenu>
@@ -64,7 +59,7 @@ export function FooterSidebar({ user }: { user: Session['user'] }) {
                   <AvatarFallback className="rounded-lg">{userInitials}</AvatarFallback>
                 </Avatar>
                 <div className="grid flex-1 text-left text-sm leading-tight">
-                  <span className="truncate font-medium">{user.name}</span>
+                  {/* <span className="truncate font-medium">{user.names}</span> */}
                   <span className="truncate text-xs">{user.email}</span>
                 </div>
               </div>
@@ -89,7 +84,7 @@ export function FooterSidebar({ user }: { user: Session['user'] }) {
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
             <DropdownMenuItem
-              onClick={handleLogout}
+              onClick={signOut}
               className="text-destructive hover:bg-destructive/10 focus:text-destructive focus:bg-destructive/10">
               <LogOut className="text-destructive" />
               Cerrar sesión

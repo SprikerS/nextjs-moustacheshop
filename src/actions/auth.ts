@@ -2,9 +2,10 @@
 
 import { jwtDecode } from 'jwt-decode'
 import { cookies } from 'next/headers'
+import { redirect } from 'next/navigation'
 
 import { API_URL, AUTHENTICATION_COOKIE, LoginFormValues, LoginSchema } from '@/constants'
-import { JwtToken } from '@/interfaces'
+import { User } from '@/interfaces'
 import { getErrorMessage } from '@/lib/http'
 
 export async function signIn(formData: LoginFormValues) {
@@ -35,7 +36,7 @@ export async function signIn(formData: LoginFormValues) {
       path: '/',
     })
 
-    return { error: '', token: jwtDecode(token) as JwtToken }
+    return { error: '', user: jwtDecode(token) as User }
   } catch (error) {
     return { error: getErrorMessage(error) || 'Error de conexión' }
   }
@@ -44,4 +45,6 @@ export async function signIn(formData: LoginFormValues) {
 export async function signOut() {
   const cookieStore = await cookies()
   cookieStore.delete(AUTHENTICATION_COOKIE)
+
+  redirect('/')
 }

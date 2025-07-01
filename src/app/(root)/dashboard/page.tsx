@@ -1,7 +1,12 @@
-export default function DashboardPage() {
+import { getUserAuthentication } from '@/lib/session'
+
+export default async function DashboardPage() {
+  const user = await getUserAuthentication()
+  if (!user) return null
+
   return (
     <>
-      <h1>Dashboard</h1>
+      <h1>{user.names}</h1>
     </>
   )
 }

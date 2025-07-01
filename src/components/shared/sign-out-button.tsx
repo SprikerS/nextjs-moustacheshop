@@ -3,15 +3,11 @@
 import { LogOut } from 'lucide-react'
 
 import { Button } from '@/components/ui'
-import { clearAccessToken } from '@/actions/logout'
+import { signOut } from '@/actions/auth'
 
 export function SignOutButton() {
-  const handleLogout = async () => {
-    await clearAccessToken()
-  }
-
   return (
-    <Button onClick={handleLogout} variant="destructive">
+    <Button onClick={signOut} variant="destructive">
       <LogOut />
       Cerrar sesión
     </Button>
