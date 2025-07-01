@@ -5,6 +5,7 @@ import { useRouter, useSearchParams } from 'next/navigation'
 import { useForm } from 'react-hook-form'
 
 import { Button, Form, FormControl, FormField, FormItem, FormLabel, FormMessage, Input } from '@/components/ui'
+import { Loader2Icon } from 'lucide-react'
 import { toast } from 'sonner'
 
 import { signIn } from '@/actions/auth'
@@ -22,6 +23,8 @@ const LoginForm = () => {
       password: '',
     },
   })
+
+  const isPending = form.formState.isSubmitting
 
   async function onSubmit(data: LoginFormValues) {
     const { error, user } = await signIn(data)
@@ -68,7 +71,16 @@ const LoginForm = () => {
                 </FormItem>
               )}
             />
-            <Button type="submit">Iniciar sesión</Button>
+            <Button type="submit" disabled={isPending}>
+              {isPending ? (
+                <>
+                  <Loader2Icon className="animate-spin" />
+                  Cargando...
+                </>
+              ) : (
+                'Iniciar sesión'
+              )}
+            </Button>
           </div>
         </form>
       </Form>
