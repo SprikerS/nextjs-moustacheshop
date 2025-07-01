@@ -1,4 +1,4 @@
-import { Table, TableBody, TableHead, TableHeader, TableRow } from '@/components/ui'
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui'
 
 import { CATEGORY_ACTIONS, PRODUCT_ACTIONS } from '@/actions'
 import { ProductRow, ProductSearchParams } from '@/components/products'
@@ -35,9 +35,15 @@ export async function ProductsTable({ params }: { params: ProductSearchParams })
         </TableHeader>
 
         <TableBody>
-          {data.map(product => (
-            <ProductRow key={product.id} product={product} />
-          ))}
+          {data.length > 0 ? (
+            data.map(product => <ProductRow key={product.id} product={product} />)
+          ) : (
+            <TableRow className="text-center text-muted-foreground hover:bg-transparent">
+              <TableCell className="py-12" colSpan={7}>
+                No se encontraron productos
+              </TableCell>
+            </TableRow>
+          )}
         </TableBody>
       </Table>
 
