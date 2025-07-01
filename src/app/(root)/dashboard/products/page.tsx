@@ -19,7 +19,7 @@ export default async function ProductsPage({ searchParams }: PageProps) {
 
   return (
     <div className="flex flex-col gap-5">
-      <Card className="container mx-auto bg-transparent">
+      <Card className="bg-transparent">
         <CardHeader>
           <CardTitle>Productos</CardTitle>
           <CardDescription>

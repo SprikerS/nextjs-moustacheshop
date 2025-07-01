@@ -16,7 +16,7 @@ export default async function RootLayout({
         <AppSidebar user={user} />
         <SidebarInset>
           <AppHeader />
-          <div className="h-full px-4">{children}</div>
+          <div className="container h-full mx-auto px-4">{children}</div>
         </SidebarInset>
       </SidebarProvider>
     </>
