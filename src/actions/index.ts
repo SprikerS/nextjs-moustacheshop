@@ -4,6 +4,7 @@ import {
   deleteProduct,
   findAllProducts,
   findOneProduct,
+  findProductsBySearch,
   revalidateProducts,
   updateProduct,
 } from './products'
@@ -17,6 +18,7 @@ export const PRODUCT_ACTIONS = {
   delete: deleteProduct,
   findAll: findAllProducts,
   findOneById: findOneProduct,
+  findProductsBySearch: findProductsBySearch,
   revalidate: revalidateProducts,
   update: updateProduct,
 }

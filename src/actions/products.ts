@@ -50,6 +50,15 @@ export async function findAllProducts({ search, limit, page, category, active }:
   return get<PaginatedResponse<Product>>('products', ['products'], params)
 }
 
+export async function findProductsBySearch(search: string, limit: number = 50) {
+  const params = new URLSearchParams({
+    search,
+    limit: limit.toString(),
+  })
+
+  return get<PaginatedResponse<Product>>('products', ['products'], params)
+}
+
 export async function findOneProduct(id: string) {
   return await getSafe<Product>(`products/${id}`)
 }
