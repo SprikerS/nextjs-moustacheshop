@@ -5,25 +5,26 @@ import Link from 'next/link'
 import type { LucideIcon } from 'lucide-react'
 import { SidebarGroup, SidebarGroupLabel, SidebarMenu, SidebarMenuButton, SidebarMenuItem } from '@/components/ui'
 
-interface NavModulesProps {
-  modules: {
+interface NavModulesProps extends React.ComponentPropsWithoutRef<typeof SidebarGroup> {
+  name?: string
+  data: {
     name: string
     url: string
     icon: LucideIcon
   }[]
 }
 
-export function SidebarModules({ modules }: NavModulesProps) {
+export function SidebarMain({ name, data, ...props }: NavModulesProps) {
   return (
-    <SidebarGroup>
-      <SidebarGroupLabel>Módulos</SidebarGroupLabel>
+    <SidebarGroup {...props}>
+      {name && <SidebarGroupLabel>{name}</SidebarGroupLabel>}
       <SidebarMenu>
-        {modules.map(module => (
-          <SidebarMenuItem key={module.name}>
-            <SidebarMenuButton tooltip={module.name} asChild>
-              <Link href={module.url}>
-                <module.icon />
-                <span>{module.name}</span>
+        {data.map(d => (
+          <SidebarMenuItem key={d.name}>
+            <SidebarMenuButton tooltip={d.name} asChild>
+              <Link href={d.url}>
+                <d.icon />
+                <span>{d.name}</span>
               </Link>
             </SidebarMenuButton>
           </SidebarMenuItem>
