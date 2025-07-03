@@ -50,7 +50,7 @@ export async function findAllProducts({ search, limit, page, category, active }:
   return get<PaginatedResponse<Product>>('products', ['products'], params)
 }
 
-export async function findProductsBySearch(search: string, limit: number = 50) {
+export async function findProductsBySearch(search: string = '', limit: number = 100) {
   const params = new URLSearchParams({
     search,
     limit: limit.toString(),
