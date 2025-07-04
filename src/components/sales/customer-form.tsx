@@ -35,13 +35,13 @@ export function CustomerSalesForm({ form }: { form: UseFormReturn<z.infer<typeof
 
   function fetchCustomerDetails(dni: string) {
     startTransition(async () => {
-      const res = await UTILS_ACTIONS.reniecScraping(dni)
-      if (!res) {
-        toast.error('Error al traer los datos del cliente')
+      const { error, data } = await UTILS_ACTIONS.reniecScraping(dni)
+      if (error || !data) {
+        toast.error(error)
         return
       }
 
-      const { names, paternalSurname, maternalSurname } = res
+      const { names, paternalSurname, maternalSurname } = data
 
       form.setValue('names', decodeHtmlEntities(names), { shouldValidate: true })
       form.setValue('paternal', decodeHtmlEntities(paternalSurname), { shouldValidate: true })
