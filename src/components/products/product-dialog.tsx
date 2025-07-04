@@ -255,7 +255,7 @@ export function ProductDialog({ categories, product, children }: NewProductFormP
 
             <DialogFooter className="mt-6">
               <DialogClose asChild>
-                <Button variant="outline">Cancel</Button>
+                <Button variant="outline">Cancelar</Button>
               </DialogClose>
               <Button type="submit" className="w-[120px]" disabled={isPending}>
                 {isPending ? (
