@@ -1,4 +1,5 @@
 import { findAllCategories } from './categories'
+import { createOrder, updateOrder } from './order'
 import {
   createProduct,
   deleteProduct,
@@ -11,6 +12,11 @@ import {
 
 export const CATEGORY_ACTIONS = {
   findAll: findAllCategories,
+}
+
+export const ORDER_ACTIONS = {
+  create: createOrder,
+  update: updateOrder,
 }
 
 export const PRODUCT_ACTIONS = {
