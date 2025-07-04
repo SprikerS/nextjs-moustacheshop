@@ -20,7 +20,7 @@ function buildOrderPayload(values: SaleFormValues) {
 
 export async function createOrder(values: SaleFormValues) {
   const payload = buildOrderPayload(values)
-  return await post('products', payload)
+  return await post('orders', payload)
 }
 
 export async function updateOrder(id: string, values: SaleFormValues) {
