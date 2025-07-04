@@ -1,7 +1,9 @@
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui'
+import { PackagePlus } from 'lucide-react'
+
+import { Button, Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui'
 
 import { CATEGORY_ACTIONS, PRODUCT_ACTIONS } from '@/actions'
-import { ProductRow, ProductSearchParams } from '@/components/products'
+import { ProductDialog, ProductRow, ProductSearchParams } from '@/components/products'
 import {
   TableFacetedFilter,
   TableFilter,
@@ -16,10 +18,18 @@ export async function ProductsTable({ params }: { params: ProductSearchParams })
 
   return (
     <TableProvider revalidate={PRODUCT_ACTIONS.revalidate}>
-      <TableFilter placeholder="Buscar producto por nombre o descripción">
-        <TableFacetedFilter categories={categories} />
-        <TableToggleFilter />
-      </TableFilter>
+      <div className="flex justify-between gap-6">
+        <TableFilter placeholder="Buscar producto por nombre o descripción">
+          <TableFacetedFilter categories={categories} />
+          <TableToggleFilter />
+        </TableFilter>
+        <ProductDialog categories={categories}>
+          <Button>
+            <PackagePlus />
+            Crear producto
+          </Button>
+        </ProductDialog>
+      </div>
 
       <Table>
         <TableHeader>
@@ -36,7 +46,7 @@ export async function ProductsTable({ params }: { params: ProductSearchParams })
 
         <TableBody>
           {data.length > 0 ? (
-            data.map(product => <ProductRow key={product.id} product={product} />)
+            data.map(product => <ProductRow key={product.id} product={product} categories={categories} />)
           ) : (
             <TableRow className="text-center text-muted-foreground hover:bg-transparent">
               <TableCell className="py-12" colSpan={7}>

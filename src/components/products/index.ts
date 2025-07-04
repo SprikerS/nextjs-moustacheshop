@@ -1,3 +1,4 @@
+export * from './product-dialog'
 export * from './product-form'
 export * from './product-row'
 export * from './product-search-params'

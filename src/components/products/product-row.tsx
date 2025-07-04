@@ -1,16 +1,18 @@
-import Link from 'next/link'
+'use client'
 
 import { PRODUCT_ACTIONS } from '@/actions'
 import { DeleteConfirmDialog } from '@/components/shared'
 import { Badge, Button, Icons, TableCell, TableRow } from '@/components/ui'
-import { Product } from '@/interfaces'
+import { Category, Product } from '@/interfaces'
 import { Loader, PackageX, SquarePen } from 'lucide-react'
+import { ProductDialog } from './product-dialog'
 
 interface ProductRow {
+  categories: Category[]
   product: Product
 }
 
-export function ProductRow({ product }: ProductRow) {
+export function ProductRow({ categories, product }: ProductRow) {
   const { id, name, price, stock, description, active } = product
   const category = product.category ? product.category.name : null
 
@@ -29,11 +31,11 @@ export function ProductRow({ product }: ProductRow) {
           </Badge>
         </TableCell>
         <TableCell>
-          <Link href={`/dashboard/products/${id}`}>
+          <ProductDialog categories={categories} product={product}>
             <Button size="icon" variant="ghost" className="size-8">
               <SquarePen />
             </Button>
-          </Link>
+          </ProductDialog>
           <DeleteConfirmDialog id={id} label="producto" action={PRODUCT_ACTIONS.delete}>
             <Button size="icon" variant="ghost" className="size-8">
               <PackageX />

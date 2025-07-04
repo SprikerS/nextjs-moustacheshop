@@ -9,7 +9,9 @@ export function ProductsTableLoading() {
           <Skeleton className="h-8 w-[106px]" />
           <Skeleton className="h-8 w-[91px]" />
         </div>
-        <Skeleton className="h-8 w-9" />
+        <div>
+          <Skeleton className="h-9 w-[144px]" />
+        </div>
       </div>
 
       <Table>
