@@ -59,12 +59,12 @@ export function ProductDialog({ categories, product, children }: NewProductFormP
   const form = useForm<ProductFormValues>({
     resolver: zodResolver(ProductSchema),
     defaultValues: {
-      name: product?.name ?? '',
-      price: String(product?.price ?? ''),
-      stock: String(product?.stock ?? ''),
-      active: product?.active ?? true,
-      category: product?.category?.id ?? '',
-      description: product?.description ?? '',
+      name: '',
+      price: '',
+      stock: '',
+      active: true,
+      category: '',
+      description: '',
     },
   })
 
@@ -88,12 +88,25 @@ export function ProductDialog({ categories, product, children }: NewProductFormP
   }
 
   useEffect(() => {
+    if (product) {
+      form.reset({
+        name: product.name,
+        price: String(product.price),
+        stock: String(product.stock),
+        active: product.active,
+        category: product.category?.id ?? '',
+        description: product.description ?? '',
+      })
+    }
+  }, [product, form])
+
+  useEffect(() => {
     if (!openDialog) {
       setTimeout(() => {
         form.reset()
       }, 100)
     }
-  }, [openDialog])
+  }, [openDialog, form])
 
   return (
     <Dialog open={openDialog} onOpenChange={setOpenDialog}>
