@@ -1,5 +1,6 @@
 'use client'
 
+import Link from 'next/link'
 import { redirect } from 'next/navigation'
 import { useTransition } from 'react'
 
@@ -10,7 +11,7 @@ import { toast } from 'sonner'
 
 import { ORDER_ACTIONS } from '@/actions'
 import { CustomerSalesForm, ProductsSaleform } from '@/components/sales'
-import { Button, Form } from '@/components/ui'
+import { Button, buttonVariants, Form } from '@/components/ui'
 import { SaleFormValues, SaleSchema } from '@/schemas'
 
 export function SaleForm() {
@@ -52,7 +53,9 @@ export function SaleForm() {
           <CustomerSalesForm form={form} />
           <ProductsSaleform form={form} />
           <div className="flex gap-4 justify-end">
-            <Button variant="destructive">Cancelar</Button>
+            <Link href="/dashboard/sales" className={buttonVariants({ variant: 'outline' })}>
+              Cancelar
+            </Link>
             <Button type="submit" disabled={isPending}>
               {isPending ? (
                 <>
@@ -60,7 +63,7 @@ export function SaleForm() {
                   Cargando...
                 </>
               ) : (
-                'Registrar venta'
+                'Registrar'
               )}
             </Button>
           </div>
