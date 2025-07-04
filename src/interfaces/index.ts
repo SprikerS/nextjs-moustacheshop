@@ -7,12 +7,15 @@ export interface PaginatedResponse<T> {
 
 export type Role = 'customer' | 'employee' | 'admin' | 'super-user'
 
-export interface User {
-  id: string
+export interface BaseUser {
+  dni: string
   names: string
   paternalSurname: string
   maternalSurname: string
-  dni: string
+}
+
+export interface User extends BaseUser {
+  id: string
   email: string
   phoneNumber?: number
   active: boolean

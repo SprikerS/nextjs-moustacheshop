@@ -9,6 +9,7 @@ import {
   revalidateProducts,
   updateProduct,
 } from './products'
+import { reniecScraping } from './utils'
 
 export const CATEGORY_ACTIONS = {
   findAll: findAllCategories,
@@ -27,4 +28,8 @@ export const PRODUCT_ACTIONS = {
   findProductsBySearch: findProductsBySearch,
   revalidate: revalidateProducts,
   update: updateProduct,
+}
+
+export const UTILS_ACTIONS = {
+  reniecScraping: reniecScraping,
 }
