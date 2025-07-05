@@ -69,16 +69,22 @@ export function CustomerSalesForm({ form }: { form: UseFormReturn<z.infer<typeof
               <FormLabel>DNI*</FormLabel>
               <FormControl>
                 <Input
-                  type="number"
+                  type="text"
+                  inputMode="numeric"
+                  pattern="\d*"
+                  maxLength={8}
                   placeholder="76263050"
                   disabled={isPending}
                   {...field}
                   onChange={e => {
                     const value = e.target.value
-                    field.onChange(value)
 
-                    if (/^\d{8}$/.test(value)) {
-                      fetchCustomerDetails(value)
+                    if (/^\d{0,8}$/.test(value)) {
+                      field.onChange(value)
+
+                      if (value.length === 8) {
+                        fetchCustomerDetails(value)
+                      }
                     }
                   }}
                 />

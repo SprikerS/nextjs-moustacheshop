@@ -143,7 +143,20 @@ export function ProductDialog({ categories, product, children }: NewProductFormP
                   <FormItem>
                     <FormLabel>Precio*</FormLabel>
                     <FormControl>
-                      <Input type="number" placeholder="3.27" step="0.01" {...field} />
+                      <Input
+                        type="text"
+                        inputMode="decimal"
+                        pattern="^\d+(\.\d{0,2})?$"
+                        placeholder="3.27"
+                        {...field}
+                        onChange={e => {
+                          const value = e.target.value
+
+                          if (/^\d*\.?\d{0,2}$/.test(value)) {
+                            field.onChange(value)
+                          }
+                        }}
+                      />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -157,7 +170,20 @@ export function ProductDialog({ categories, product, children }: NewProductFormP
                   <FormItem>
                     <FormLabel>Stock*</FormLabel>
                     <FormControl>
-                      <Input type="number" placeholder="27" {...field} />
+                      <Input
+                        type="text"
+                        inputMode="numeric"
+                        pattern="\d*"
+                        placeholder="27"
+                        {...field}
+                        onChange={e => {
+                          const value = e.target.value
+
+                          if (/^\d*$/.test(value)) {
+                            field.onChange(value)
+                          }
+                        }}
+                      />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
