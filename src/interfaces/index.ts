@@ -1,11 +1,11 @@
+import { Role } from '@/constants/roles'
+
 export interface PaginatedResponse<T> {
   data: T[]
   total: number
   limit: number
   offset: number
 }
-
-export type Role = 'customer' | 'employee' | 'admin' | 'super-user'
 
 export interface BaseUser {
   dni: string
@@ -17,7 +17,8 @@ export interface BaseUser {
 export interface User extends BaseUser {
   id: string
   email: string
-  phoneNumber?: number
+  phoneNumber: number
+  verified: boolean
   active: boolean
   roles: Role[]
   iat: number

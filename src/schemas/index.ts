@@ -1,5 +1,7 @@
 import { z } from 'zod'
 
+import { ROLE_VALUES } from '@/constants/roles'
+
 export const BaseUserSchema = z.object({
   dni: z
     .string({
@@ -12,27 +14,15 @@ export const BaseUserSchema = z.object({
   maternal: z.string().min(1, { message: 'El apellido materno es requerido' }),
 })
 
-export const ValidRoles = z.enum(['customer', 'employee', 'admin', 'super-user'])
+const ValidRoles = z.enum(ROLE_VALUES as [string, ...string[]])
 
 export const UserSchema = BaseUserSchema.extend({
   email: z.string().trim().email({ message: 'El correo electrónico debe ser válido' }),
-  password: z
-    .string()
-    .min(6, { message: 'La contraseña debe tener al menos 6 caracteres' })
-    .max(50, { message: 'La contraseña no debe superar los 50 caracteres' })
-    .regex(/(?:(?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*/, {
-      message: 'La contraseña debe tener una mayúscula, una minúscula y un número o símbolo',
-    }),
   phone: z
     .string()
     .trim()
-    .regex(/^\d{9}$/, { message: 'El número de teléfono debe tener 9 dígitos' })
-    .optional(),
-  roles: z
-    .array(ValidRoles, {
-      invalid_type_error: 'Debe ser un arreglo de roles válidos',
-    })
-    .nonempty({ message: 'Debes asignar al menos un rol' }),
+    .regex(/^\d{9}$/, { message: 'El número de teléfono debe tener 9 dígitos' }),
+  roles: z.array(ValidRoles).nonempty({ message: 'Debes asignar al menos un rol' }),
   active: z.boolean(),
 })
 
