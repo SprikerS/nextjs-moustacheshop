@@ -1,8 +1,8 @@
 export const ROLES_DATA = [
-  { value: 'customer', label: 'Cliente' },
-  { value: 'employee', label: 'Empleado' },
-  { value: 'admin', label: 'Administrador' },
-  { value: 'super-user', label: 'Super Usuario' },
+  { value: 'customer', label: 'cliente' },
+  { value: 'employee', label: 'empleado' },
+  { value: 'admin', label: 'administrador' },
+  // { value: 'super-user', label: 'Super Usuario' },
 ] as const
 
 export type Role = (typeof ROLES_DATA)[number]['value']
