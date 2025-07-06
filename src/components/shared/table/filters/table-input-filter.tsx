@@ -3,14 +3,14 @@
 import { useQueryState } from 'nuqs'
 
 import { Input } from '@/components/ui'
-import { useTable } from './table-provider'
+import { useTable, TableToggleFilter } from '@/components/shared/table'
 
 interface TableFilterProps {
   placeholder?: string
   children?: React.ReactNode
 }
 
-export function TableFilter({ children, placeholder }: TableFilterProps) {
+export function TableInputFilter({ children, placeholder }: TableFilterProps) {
   const [search, setSearch] = useQueryState('search', { defaultValue: '' })
   const { revalidate } = useTable()
 
@@ -30,6 +30,7 @@ export function TableFilter({ children, placeholder }: TableFilterProps) {
         className="max-w-xs"
       />
       {children}
+      <TableToggleFilter />
     </div>
   )
 }

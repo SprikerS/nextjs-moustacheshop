@@ -4,13 +4,7 @@ import { Button, Table, TableBody, TableCell, TableHead, TableHeader, TableRow }
 
 import { CATEGORY_ACTIONS, PRODUCT_ACTIONS } from '@/actions'
 import { ProductDialog, ProductRow, ProductSearchParams } from '@/components/products'
-import {
-  TableFacetedFilter,
-  TableFilter,
-  TablePagination,
-  TableProvider,
-  TableToggleFilter,
-} from '@/components/shared/table'
+import { TableFacetedFilter, TableInputFilter, TablePagination, TableProvider } from '@/components/shared/table'
 
 export async function ProductsTable({ params }: { params: ProductSearchParams }) {
   const { data, total } = await PRODUCT_ACTIONS.findAll(params)
@@ -19,10 +13,9 @@ export async function ProductsTable({ params }: { params: ProductSearchParams })
   return (
     <TableProvider revalidate={PRODUCT_ACTIONS.revalidate}>
       <div className="flex justify-between gap-6">
-        <TableFilter placeholder="Buscar producto por nombre o descripción">
+        <TableInputFilter placeholder="Buscar producto por nombre o descripción">
           <TableFacetedFilter categories={categories} />
-          <TableToggleFilter />
-        </TableFilter>
+        </TableInputFilter>
         <ProductDialog categories={categories}>
           <Button>
             <PackagePlus />

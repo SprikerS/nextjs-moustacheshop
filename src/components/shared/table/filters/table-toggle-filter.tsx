@@ -6,7 +6,7 @@ import { useState } from 'react'
 import { Badge, Button, Separator } from '@/components/ui'
 import { PlusCircle } from 'lucide-react'
 
-import { useTable } from './table-provider'
+import { useTable } from '@/components/shared/table'
 
 export function TableToggleFilter() {
   const { revalidate } = useTable()
