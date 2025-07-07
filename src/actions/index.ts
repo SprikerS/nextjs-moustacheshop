@@ -9,6 +9,7 @@ import {
   revalidateProducts,
   updateProduct,
 } from './products'
+import { createUser, deleteUser, findAllUsers, revalidateUsers, updateUser } from './users'
 import { reniecScraping } from './utils'
 
 export const CATEGORY_ACTIONS = {
@@ -28,6 +29,14 @@ export const PRODUCT_ACTIONS = {
   findProductsBySearch: findProductsBySearch,
   revalidate: revalidateProducts,
   update: updateProduct,
+}
+
+export const USERS_ACTIONS = {
+  create: createUser,
+  delete: deleteUser,
+  findAll: findAllUsers,
+  revalidate: revalidateUsers,
+  update: updateUser,
 }
 
 export const UTILS_ACTIONS = {

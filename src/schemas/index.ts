@@ -1,6 +1,6 @@
 import { z } from 'zod'
 
-import { ROLE_VALUES } from '@/constants/roles'
+import { Role, ROLE_VALUES } from '@/constants/roles'
 
 export const BaseUserSchema = z.object({
   dni: z
@@ -14,15 +14,13 @@ export const BaseUserSchema = z.object({
   maternal: z.string().min(1, { message: 'El apellido materno es requerido' }),
 })
 
-const ValidRoles = z.enum(ROLE_VALUES as [string, ...string[]])
-
 export const UserSchema = BaseUserSchema.extend({
   email: z.string().trim().email({ message: 'El correo electrónico debe ser válido' }),
   phone: z
     .string()
     .trim()
     .regex(/^\d{9}$/, { message: 'El número de teléfono debe tener 9 dígitos' }),
-  roles: z.array(ValidRoles).nonempty({ message: 'Debes asignar al menos un rol' }),
+  role: z.enum(ROLE_VALUES as [Role, ...Role[]]),
   active: z.boolean(),
 })
 

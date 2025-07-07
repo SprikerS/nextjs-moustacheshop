@@ -1,7 +1,7 @@
 export const ROLES_DATA = [
   { value: 'customer', label: 'cliente' },
   { value: 'employee', label: 'empleado' },
-  { value: 'admin', label: 'administrador' },
+  { value: 'admin', label: 'admin' },
   // { value: 'super-user', label: 'Super Usuario' },
 ] as const
 
