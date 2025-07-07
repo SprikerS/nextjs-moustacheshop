@@ -218,14 +218,20 @@ export function ProductsSaleform({ form }: { form: UseFormReturn<z.infer<typeof 
                 {searchedProducts.map(product => (
                   <CommandItem
                     key={product.id}
-                    disabled={product.stock <= 0}
-                    onSelect={() => addProduct(product)}
-                    className="flex items-center justify-between">
-                    <div className="flex flex-col">
-                      <span>{product.name}</span>
-                      <span className="text-sm text-muted-foreground">
-                        S/ {product.price.toFixed(2)} - Stock: {product.stock}
-                      </span>
+                    disabled={product.stock <= 0 || product.active === false}
+                    onSelect={() => addProduct(product)}>
+                    <div className="flex flex-row items-center gap-2 w-full justify-between">
+                      <div className="flex flex-col">
+                        <span>{product.name}</span>
+                        <span className="text-sm text-muted-foreground">
+                          S/ {product.price.toFixed(2)} - Stock: {product.stock}
+                        </span>
+                      </div>
+                      {!product.active && (
+                        <Badge variant="outline" className="block text-muted-foreground px-1.5">
+                          inactivo
+                        </Badge>
+                      )}
                     </div>
                   </CommandItem>
                 ))}
