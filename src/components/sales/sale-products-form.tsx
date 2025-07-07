@@ -55,7 +55,7 @@ interface SelectedProduct {
   subtotal: number
 }
 
-export function ProductsSaleform({ form }: { form: UseFormReturn<z.infer<typeof SaleSchema>> }) {
+export function SaleProductsForm({ form }: { form: UseFormReturn<z.infer<typeof SaleSchema>> }) {
   const [open, setOpen] = useState(false)
   const [openCalendar, setOpenCalendar] = useState(false)
 

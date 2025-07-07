@@ -10,7 +10,7 @@ import { useForm, type UseFormReturn } from 'react-hook-form'
 import { toast } from 'sonner'
 
 import { ORDER_ACTIONS } from '@/actions'
-import { ProductsSaleform } from '@/components/sales'
+import { SaleProductsForm } from '@/components/sales'
 import { CustomerForm } from '@/components/shared/forms'
 import {
   Button,
@@ -73,7 +73,7 @@ export function SaleForm() {
             </CardContent>
           </Card>
 
-          <ProductsSaleform form={form} />
+          <SaleProductsForm form={form} />
           <div className="flex gap-4 justify-end">
             <Link href="/dashboard/sales" className={buttonVariants({ variant: 'outline' })}>
               Cancelar
