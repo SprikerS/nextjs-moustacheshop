@@ -1,7 +1,7 @@
 import { cookies } from 'next/headers'
-import { getErrorMessage } from './errors'
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL
+import { API_URL } from '@/constants'
+import { getErrorMessage } from '@/lib/http'
 
 export const getHeaders = async () => {
   const cookieStore = await cookies()
