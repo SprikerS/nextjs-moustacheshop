@@ -1,9 +1,15 @@
-import Link from 'next/link'
+import { Suspense } from 'react'
 
-import { Button, Card, CardAction, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui'
-import { Plus } from 'lucide-react'
+import type { SearchParams } from 'nuqs/server'
 
-export default async function SalesPage() {
+import { SalesTable } from '@/components/sales'
+import { SalesTableLoading } from '@/components/sales/sales-table-loading'
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui'
+import { loadSearchParams } from '@/constants'
+
+export default async function SalesPage({ searchParams }: { searchParams: Promise<SearchParams> }) {
+  const params = await loadSearchParams(searchParams)
+
   return (
     <div className="flex flex-col gap-5">
       <Card className="bg-transparent">
@@ -12,16 +18,12 @@ export default async function SalesPage() {
           <CardDescription>
             Administra las ventas de tu tienda, revisa el historial de ventas y gestiona los pedidos
           </CardDescription>
-          <CardAction>
-            <Link href="/dashboard/sales/create">
-              <Button>
-                <Plus />
-                Nueva venta
-              </Button>
-            </Link>
-          </CardAction>
         </CardHeader>
-        <CardContent className="flex flex-col gap-6"></CardContent>
+        <CardContent className="flex flex-col gap-6">
+          <Suspense fallback={<SalesTableLoading />}>
+            <SalesTable params={params} />
+          </Suspense>
+        </CardContent>
       </Card>
     </div>
   )

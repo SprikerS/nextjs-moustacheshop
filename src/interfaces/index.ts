@@ -40,3 +40,19 @@ export interface Product {
   category?: Category
   description?: string
 }
+
+export interface Order {
+  id: string
+  date: string
+  customer: User
+  employee: User
+  details: OrderDetail[]
+}
+
+export interface OrderDetail {
+  id: string
+  quantity: number
+  salePrice: number
+  total: number
+  product: Product
+}
