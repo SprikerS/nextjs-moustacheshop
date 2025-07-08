@@ -5,7 +5,7 @@ import { revalidateTag } from 'next/cache'
 
 import { SearchParams } from '@/constants'
 import { Order, PaginatedResponse } from '@/interfaces'
-import { del, get, patch, post } from '@/lib/http'
+import { del, get, getSafe, patch, post } from '@/lib/http'
 import { SaleFormValues } from '@/schemas'
 
 export async function revalidateUsers() {
@@ -48,4 +48,8 @@ export async function findAllOrders({ search, limit, page }: SearchParams) {
 
 export async function deleteOrder(id: string) {
   return await del(`orders/${id}`)
+}
+
+export async function findOneOrder(id: string) {
+  return await getSafe<Order>(`orders/${id}`)
 }

@@ -1,5 +1,5 @@
 import { findAllCategories } from './categories'
-import { createOrder, deleteOrder, findAllOrders, updateOrder } from './order'
+import { createOrder, deleteOrder, findAllOrders, findOneOrder, updateOrder } from './order'
 import {
   createProduct,
   deleteProduct,
@@ -22,6 +22,7 @@ export const ORDER_ACTIONS = {
   findAll: findAllOrders,
   revalidate: revalidateProducts,
   update: updateOrder,
+  findOneById: findOneOrder,
 }
 
 export const PRODUCT_ACTIONS = {
