@@ -7,10 +7,11 @@ import { useTable, TableToggleFilter } from '@/components/shared/table'
 
 interface TableFilterProps {
   placeholder?: string
+  activeFilter?: boolean
   children?: React.ReactNode
 }
 
-export function TableInputFilter({ children, placeholder }: TableFilterProps) {
+export function TableInputFilter({ children, placeholder, activeFilter = true }: TableFilterProps) {
   const [search, setSearch] = useQueryState('search', { defaultValue: '' })
   const { revalidate } = useTable()
 
@@ -30,7 +31,7 @@ export function TableInputFilter({ children, placeholder }: TableFilterProps) {
         className="max-w-xs"
       />
       {children}
-      <TableToggleFilter />
+      {activeFilter && <TableToggleFilter />}
     </div>
   )
 }
