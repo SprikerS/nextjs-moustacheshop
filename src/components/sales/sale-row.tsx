@@ -1,7 +1,9 @@
 'use client'
 
+import Link from 'next/link'
 import { useState } from 'react'
 
+import { format } from 'date-fns'
 import { Download, Loader2Icon, Printer, SquarePen, Trash } from 'lucide-react'
 import { toast } from 'sonner'
 
@@ -10,7 +12,6 @@ import { DeleteConfirmDialog } from '@/components/shared'
 import { Button, TableCell, TableRow } from '@/components/ui'
 import { Order } from '@/interfaces'
 import { CurrencyFormatter, downloadReport, printPreviewReport } from '@/utils'
-import Link from 'next/link'
 
 export function SaleRow({ order }: { order: Order }) {
   const { id, date, customer, employee, details } = order
@@ -37,7 +38,7 @@ export function SaleRow({ order }: { order: Order }) {
     setDownloadLoading(true)
 
     try {
-      await downloadReport(id, `${date}-${customer.dni}.pdf`)
+      await downloadReport(id, `${customer.dni} ${format(date, 'yyyy-MM-dd HH:mm')}.pdf`)
     } catch (error) {
       toast.error(error instanceof Error ? error.message : 'Ocurrió un error inesperado')
     } finally {
@@ -56,7 +57,7 @@ export function SaleRow({ order }: { order: Order }) {
             {downloadLoading ? <Loader2Icon className="size-4 animate-spin" /> : <Download />}
           </Button>
         </TableCell>
-        <TableCell className="text-center border-dashed border-r">{date}</TableCell>
+        <TableCell className="text-center border-dashed border-r">{format(date, 'dd-MM-yyyy hh:mm a')}</TableCell>
 
         <TableCell className="text-center">{customer.dni}</TableCell>
         <TableCell className="text-center">{customer.names}</TableCell>

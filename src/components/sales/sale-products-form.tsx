@@ -190,7 +190,18 @@ export function SaleProductsForm({ form }: { form: UseFormReturn<SaleFormValues>
                       onSelect={date => {
                         if (date) {
                           setOpenCalendar(false)
-                          field.onChange(date)
+
+                          const prevDate = field.value ?? new Date()
+                          const newDate = new Date(
+                            date.getFullYear(),
+                            date.getMonth(),
+                            date.getDate(),
+                            prevDate.getHours(),
+                            prevDate.getMinutes(),
+                            prevDate.getSeconds(),
+                          )
+
+                          field.onChange(newDate)
                         }
                       }}
                     />

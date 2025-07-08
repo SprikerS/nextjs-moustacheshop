@@ -1,6 +1,5 @@
 'use server'
 
-import { format } from 'date-fns'
 import { revalidateTag } from 'next/cache'
 
 import { SearchParams } from '@/constants'
@@ -14,7 +13,7 @@ export async function revalidateUsers() {
 
 function buildOrderPayload(values: SaleFormValues) {
   return {
-    date: format(values.date, 'yyyy-MM-dd'),
+    date: values.date.toISOString(),
     dni: values.dni,
     names: values.names,
     paternalSurname: values.paternal,
