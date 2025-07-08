@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation'
 import { useTransition } from 'react'
 
 import { zodResolver } from '@hookform/resolvers/zod'
+import { parseISO } from 'date-fns'
 import { Loader2Icon, Users } from 'lucide-react'
 import { useForm, type UseFormReturn } from 'react-hook-form'
 import { toast } from 'sonner'
@@ -47,7 +48,7 @@ export function SaleForm({ order }: SaleFormProps) {
   const form = useForm<SaleFormValues>({
     resolver: zodResolver(SaleSchema),
     defaultValues: {
-      date: order ? new Date(order.date) : new Date(),
+      date: order ? parseISO(order.date) : new Date(),
       dni: order?.customer.dni || '',
       names: order?.customer.names || '',
       paternal: order?.customer.paternalSurname || '',
@@ -89,7 +90,6 @@ export function SaleForm({ order }: SaleFormProps) {
               <CustomerForm form={form as unknown as UseFormReturn<BaseUserFormValues>} />
             </CardContent>
           </Card>
-
           <SaleProductsForm form={form} />
           <div className="flex gap-4 justify-end">
             <Link href="/dashboard/sales" className={buttonVariants({ variant: 'outline' })}>
