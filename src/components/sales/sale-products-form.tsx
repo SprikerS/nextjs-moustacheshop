@@ -7,7 +7,6 @@ import { es } from 'date-fns/locale'
 import { CalendarDays, CalendarIcon, Minus, Plus, Trash2 } from 'lucide-react'
 import { UseFormReturn } from 'react-hook-form'
 import { toast } from 'sonner'
-import { z } from 'zod'
 
 import {
   Badge,
@@ -44,7 +43,7 @@ import {
 
 import { PRODUCT_ACTIONS } from '@/actions'
 import { Product } from '@/interfaces'
-import { SaleSchema } from '@/schemas'
+import { SaleFormValues } from '@/schemas'
 
 interface SelectedProduct {
   id: string
@@ -55,12 +54,12 @@ interface SelectedProduct {
   subtotal: number
 }
 
-export function SaleProductsForm({ form }: { form: UseFormReturn<z.infer<typeof SaleSchema>> }) {
+export function SaleProductsForm({ form }: { form: UseFormReturn<SaleFormValues> }) {
   const [open, setOpen] = useState(false)
   const [openCalendar, setOpenCalendar] = useState(false)
 
   const [searchedProducts, setSearchedProducts] = useState<Product[]>([])
-  const [selectedProducts, setSelectedProducts] = useState<SelectedProduct[]>([])
+  const [selectedProducts, setSelectedProducts] = useState<SelectedProduct[]>(form.getValues('products') || [])
 
   const { errors, isSubmitted } = form.formState
   const productsTotal = selectedProducts.reduce((sum, p) => sum + p.subtotal, 0)
@@ -151,7 +150,7 @@ export function SaleProductsForm({ form }: { form: UseFormReturn<z.infer<typeof 
 
   useEffect(() => {
     form.setValue('products', selectedProducts, { shouldValidate: true })
-  }, [selectedProducts])
+  }, [selectedProducts, form])
 
   useEffect(() => {
     fetchProducts()
@@ -268,7 +267,7 @@ export function SaleProductsForm({ form }: { form: UseFormReturn<z.infer<typeof 
                         <div className="flex items-center gap-2">
                           <Button
                             type="button"
-                            variant="outline"
+                            variant="ghost"
                             size="icon"
                             className="size-8"
                             onClick={() => updateQuantity(id, quantity - 1)}>
@@ -277,7 +276,7 @@ export function SaleProductsForm({ form }: { form: UseFormReturn<z.infer<typeof 
                           <span className="w-8 text-center">{quantity}</span>
                           <Button
                             type="button"
-                            variant="outline"
+                            variant="ghost"
                             size="icon"
                             className="size-8"
                             onClick={() => updateQuantity(id, quantity + 1)}>

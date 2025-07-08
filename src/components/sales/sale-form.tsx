@@ -1,7 +1,7 @@
 'use client'
 
 import Link from 'next/link'
-import { redirect } from 'next/navigation'
+import { useRouter } from 'next/navigation'
 import { useTransition } from 'react'
 
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -22,27 +22,44 @@ import {
   CardTitle,
   Form,
 } from '@/components/ui'
+import { Order } from '@/interfaces'
 import { BaseUserFormValues, SaleFormValues, SaleSchema } from '@/schemas'
 
-export function SaleForm() {
+interface SaleFormProps {
+  order?: Order
+}
+
+export function SaleForm({ order }: SaleFormProps) {
+  const router = useRouter()
+
   const [isPending, startTransition] = useTransition()
+
+  const initialProducts =
+    order?.details.map(detail => ({
+      id: detail.product.id,
+      name: detail.product.name,
+      price: detail.salePrice,
+      stock: detail.product.stock,
+      quantity: detail.quantity,
+      subtotal: detail.total,
+    })) || []
 
   const form = useForm<SaleFormValues>({
     resolver: zodResolver(SaleSchema),
     defaultValues: {
-      date: new Date(),
-      dni: '',
-      names: '',
-      paternal: '',
-      maternal: '',
-      products: [],
+      date: order ? new Date(order.date) : new Date(),
+      dni: order?.customer.dni || '',
+      names: order?.customer.names || '',
+      paternal: order?.customer.paternalSurname || '',
+      maternal: order?.customer.maternalSurname || '',
+      products: initialProducts,
     },
   })
 
   function onSubmit(data: SaleFormValues) {
     startTransition(async () => {
-      const isEdit = false
-      const res = await ORDER_ACTIONS.create(data)
+      const isEdit = !!order
+      const res = isEdit ? await ORDER_ACTIONS.update(order.id, data) : await ORDER_ACTIONS.create(data)
 
       if (res.error) {
         toast.error(`Error al ${isEdit ? 'actualizar' : 'crear'} la venta`, {
@@ -52,7 +69,7 @@ export function SaleForm() {
       }
 
       toast[isEdit ? 'info' : 'success'](`Venta ${isEdit ? 'actualizada' : 'creada'} exitosamente`)
-      redirect('/dashboard/sales')
+      router.push('/dashboard/sales')
     })
   }
 
@@ -78,12 +95,14 @@ export function SaleForm() {
             <Link href="/dashboard/sales" className={buttonVariants({ variant: 'outline' })}>
               Cancelar
             </Link>
-            <Button type="submit" disabled={isPending}>
+            <Button type="submit" className="sm:w-[120px]" disabled={isPending}>
               {isPending ? (
                 <>
                   <Loader2Icon className="animate-spin" />
                   Cargando...
                 </>
+              ) : order ? (
+                'Actualizar'
               ) : (
                 'Registrar'
               )}
