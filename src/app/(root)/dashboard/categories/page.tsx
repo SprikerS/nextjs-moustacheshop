@@ -1,13 +1,29 @@
-import { CATEGORY_ACTIONS } from '@/actions'
+import { Suspense } from 'react'
 
-export default async function CategoriesPage() {
-  const categories = await CATEGORY_ACTIONS.findAll()
+import { SearchParams } from 'nuqs'
+
+import { CategoriesTable, CategoriesTableLoading } from '@/components/categories'
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui'
+import { loadSearchParams } from '@/constants'
+
+type PageProps = {
+  searchParams: Promise<SearchParams>
+}
+
+export default async function CategoriesPage({ searchParams }: PageProps) {
+  const params = await loadSearchParams(searchParams)
 
   return (
-    <>
-      <pre>
-        <code>{JSON.stringify(categories, null, 2)}</code>
-      </pre>
-    </>
+    <Card className="bg-transparent">
+      <CardHeader>
+        <CardTitle>Categorías</CardTitle>
+        <CardDescription>Aquí puedes administrar las categorías de tu tienda</CardDescription>
+      </CardHeader>
+      <CardContent className="flex flex-col gap-6">
+        <Suspense fallback={<CategoriesTableLoading />}>
+          <CategoriesTable params={params} />
+        </Suspense>
+      </CardContent>
+    </Card>
   )
 }

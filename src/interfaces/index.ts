@@ -28,6 +28,7 @@ export interface User extends BaseUser {
 export interface Category {
   id: string
   name: string
+  description?: string
   productsCount?: number
 }
 

@@ -8,7 +8,7 @@ import { TableFacetedFilter, TableInputFilter, TablePagination, TableProvider } 
 
 export async function ProductsTable({ params }: { params: ProductSearchParams }) {
   const { data, total } = await PRODUCT_ACTIONS.findAll(params)
-  const categories = await CATEGORY_ACTIONS.findAll()
+  const { data: categories } = await CATEGORY_ACTIONS.findAll()
 
   return (
     <TableProvider revalidate={PRODUCT_ACTIONS.revalidate}>

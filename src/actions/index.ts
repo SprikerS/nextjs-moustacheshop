@@ -1,4 +1,4 @@
-import { findAllCategories } from './categories'
+import { createCategory, deleteCategory, findAllCategories, revalidateCategories, updateCategory } from './categories'
 import { createOrder, deleteOrder, findAllOrders, findOneOrder, updateOrder } from './order'
 import {
   createProduct,
@@ -13,7 +13,11 @@ import { createUser, deleteUser, findAllUsers, revalidateUsers, updateUser } fro
 import { reniecScraping } from './utils'
 
 export const CATEGORY_ACTIONS = {
+  create: createCategory,
+  delete: deleteCategory,
   findAll: findAllCategories,
+  revalidate: revalidateCategories,
+  update: updateCategory,
 }
 
 export const ORDER_ACTIONS = {

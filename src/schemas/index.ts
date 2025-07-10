@@ -24,6 +24,11 @@ export const UserSchema = BaseUserSchema.extend({
   active: z.boolean(),
 })
 
+export const CategorySchema = z.object({
+  name: z.string().trim().min(2, { message: 'El nombre debe tener al menos 2 caracteres' }),
+  description: z.string().trim().optional(),
+})
+
 export const ProductSchema = z.object({
   name: z.string().min(2, { message: 'El nombre debe tener al menos 2 caracteres' }),
   price: z
@@ -58,3 +63,4 @@ export type ProductFormValues = z.infer<typeof ProductSchema>
 export type SaleFormValues = z.infer<typeof SaleSchema>
 export type UserFormValues = z.infer<typeof UserSchema>
 export type BaseUserFormValues = z.infer<typeof BaseUserSchema>
+export type CategoryFormValues = z.infer<typeof CategorySchema>
