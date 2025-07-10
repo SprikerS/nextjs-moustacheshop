@@ -129,7 +129,7 @@ export function ProductDialog({ categories, product, children }: NewProductFormP
                   <FormItem>
                     <FormLabel>Nombre*</FormLabel>
                     <FormControl>
-                      <Input type="text" placeholder="Fresa" {...field} />
+                      <Input type="text" {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -147,7 +147,6 @@ export function ProductDialog({ categories, product, children }: NewProductFormP
                         type="text"
                         inputMode="decimal"
                         pattern="^\d+(\.\d{0,2})?$"
-                        placeholder="3.27"
                         {...field}
                         onChange={e => {
                           const value = e.target.value
@@ -174,7 +173,6 @@ export function ProductDialog({ categories, product, children }: NewProductFormP
                         type="text"
                         inputMode="numeric"
                         pattern="\d*"
-                        placeholder="27"
                         {...field}
                         onChange={e => {
                           const value = e.target.value
@@ -252,7 +250,7 @@ export function ProductDialog({ categories, product, children }: NewProductFormP
                     <FormItem className="w-full">
                       <FormLabel>Descripción</FormLabel>
                       <FormControl>
-                        <Input type="text" placeholder="Fresa fresca y dulce" {...field} />
+                        <Input type="text" {...field} />
                       </FormControl>
                       <FormMessage />
                     </FormItem>

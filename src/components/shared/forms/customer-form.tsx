@@ -51,7 +51,6 @@ export function CustomerForm({ form }: { form: UseFormReturn<BaseUserFormValues>
                 inputMode="numeric"
                 pattern="\d*"
                 maxLength={8}
-                placeholder="76263050"
                 disabled={isPending}
                 {...field}
                 onChange={e => {
@@ -79,7 +78,7 @@ export function CustomerForm({ form }: { form: UseFormReturn<BaseUserFormValues>
           <FormItem>
             <FormLabel>Nombres*</FormLabel>
             <FormControl>
-              <Input type="text" placeholder="Jeremy" disabled={isPending} {...field} />
+              <Input type="text" disabled={isPending} {...field} />
             </FormControl>
             <FormMessage className="truncate" />
           </FormItem>
@@ -93,7 +92,7 @@ export function CustomerForm({ form }: { form: UseFormReturn<BaseUserFormValues>
           <FormItem>
             <FormLabel>Apellido Paterno*</FormLabel>
             <FormControl>
-              <Input type="text" placeholder="Estelo" disabled={isPending} {...field} />
+              <Input type="text" disabled={isPending} {...field} />
             </FormControl>
             <FormMessage className="truncate" />
           </FormItem>
@@ -107,7 +106,7 @@ export function CustomerForm({ form }: { form: UseFormReturn<BaseUserFormValues>
           <FormItem>
             <FormLabel>Apellido Materno*</FormLabel>
             <FormControl>
-              <Input type="text" placeholder="Arismendiz" disabled={isPending} {...field} />
+              <Input type="text" disabled={isPending} {...field} />
             </FormControl>
             <FormMessage className="truncate" />
           </FormItem>

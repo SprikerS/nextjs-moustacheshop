@@ -135,7 +135,7 @@ export function UserDialog({ children, user }: UserDialogProps) {
                   <FormItem>
                     <FormLabel>Correo*</FormLabel>
                     <FormControl>
-                      <Input type="email" placeholder="example@gmail.com" {...field} />
+                      <Input type="email" {...field} />
                     </FormControl>
                     <FormMessage className="truncate" />
                   </FormItem>
@@ -152,7 +152,6 @@ export function UserDialog({ children, user }: UserDialogProps) {
                         type="text"
                         inputMode="numeric"
                         pattern="\d*"
-                        placeholder="987654321"
                         maxLength={9}
                         {...field}
                         onChange={e => {
