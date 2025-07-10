@@ -32,7 +32,7 @@ export async function deleteCategory(id: string) {
   return await del(`categories/${id}`)
 }
 
-export async function findAllCategories({ search = '', limit = 10, page = 1 }: Partial<SearchParams> = {}) {
+export async function findAllCategories({ search = '', limit = 50, page = 1 }: Partial<SearchParams> = {}) {
   const params = new URLSearchParams({
     search: search.toString(),
     limit: limit.toString(),
