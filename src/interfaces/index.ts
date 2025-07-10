@@ -57,3 +57,18 @@ export interface OrderDetail {
   total: number
   product: Product
 }
+
+export interface Summaries {
+  usersTotal: number
+  usersActive: number
+  usersInactive: number
+  usersCustomers: number
+  usersEmployees: number
+  usersAdmins: number
+  productsTotal: number
+  produtcsActive: number
+  produtcsInactive: number
+  ordersTotal: number
+  topEmployee: string
+  topCustomer: string
+}

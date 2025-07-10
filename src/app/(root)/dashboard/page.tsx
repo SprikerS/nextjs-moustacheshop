@@ -1,12 +1,7 @@
-import { getUserAuthentication } from '@/lib/session'
+import { UTILS_ACTIONS } from '@/actions'
+import { DashboardLayout } from '@/components/dashboard/dashboard-layout'
 
 export default async function DashboardPage() {
-  const user = await getUserAuthentication()
-  if (!user) return null
-
-  return (
-    <>
-      <h1>{user.names}</h1>
-    </>
-  )
+  const summaries = await UTILS_ACTIONS.fetchSummaries()
+  return <DashboardLayout summaries={summaries} />
 }

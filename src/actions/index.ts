@@ -10,7 +10,7 @@ import {
   updateProduct,
 } from './products'
 import { createUser, deleteUser, findAllUsers, revalidateUsers, updateUser } from './users'
-import { reniecScraping } from './utils'
+import { reniecScraping, summaries } from './utils'
 
 export const CATEGORY_ACTIONS = {
   create: createCategory,
@@ -49,4 +49,5 @@ export const USERS_ACTIONS = {
 
 export const UTILS_ACTIONS = {
   reniecScraping: reniecScraping,
+  fetchSummaries: summaries,
 }
