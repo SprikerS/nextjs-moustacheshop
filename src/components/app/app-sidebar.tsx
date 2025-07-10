@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 
-import { Box, House, LifeBuoy, Send, ShoppingCart, Tags, User } from 'lucide-react'
+import { Box, House, LifeBuoy, Palette, Send, ShoppingCart, Tags, User } from 'lucide-react'
 
 import { FooterSidebar, HeaderSidebar, SidebarMain } from '@/components/app'
 import {
@@ -15,6 +15,7 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
   SidebarRail,
+  ThemeToggle,
 } from '@/components/ui'
 import { User as UserSession } from '@/interfaces'
 
@@ -85,6 +86,19 @@ export function AppSidebar({ user, ...props }: AppSidebarProps) {
         <SidebarMain name="Sistema" data={system} />
         <SidebarMain name="Módulos" data={modules} />
         <SidebarMain className="mt-auto" data={footer} />
+        <SidebarGroup>
+          <SidebarMenu>
+            <SidebarMenuItem>
+              <div className="flex items-center justify-between px-2">
+                <div className="flex items-center gap-2">
+                  <Palette className="size-4" />
+                  <span className="text-sm">Tema</span>
+                </div>
+                <ThemeToggle />
+              </div>
+            </SidebarMenuItem>
+          </SidebarMenu>
+        </SidebarGroup>
       </SidebarContent>
       <SidebarFooter>
         <FooterSidebar user={user} />
