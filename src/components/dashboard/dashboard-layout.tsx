@@ -60,8 +60,6 @@ export function DashboardLayout({ summaries }: { summaries: Summaries }) {
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           <StatCard title="Órdenes Totales" value={ordersTotal} icon={ShoppingCart} />
-        </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <SpotlightCard title="Vendedor del Mes" name={topEmployee} subtitle="Empleado con más ventas" icon={Trophy} />
           <SpotlightCard title="Cliente Destacado" name={topCustomer} subtitle="Cliente con más compras" icon={Star} />
         </div>
