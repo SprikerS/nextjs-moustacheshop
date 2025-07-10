@@ -3,7 +3,8 @@ import Link from 'next/link'
 import { buttonVariants } from '@/components/ui'
 import { LayoutDashboard, LogIn } from 'lucide-react'
 
-import { Footer, Header, SignOutButton } from '@/components/shared'
+import { Footer, Header } from '@/components/app'
+import { SignOutButton } from '@/components/shared'
 import { getUserAuthentication } from '@/lib/session'
 
 export default async function AppPage() {

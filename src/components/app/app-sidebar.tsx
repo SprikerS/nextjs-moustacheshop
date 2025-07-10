@@ -4,7 +4,7 @@ import Link from 'next/link'
 
 import { Box, House, LifeBuoy, Send, ShoppingCart, Tags, User } from 'lucide-react'
 
-import { FooterSidebar, HeaderSidebar, SidebarMain } from '@/components/dashboard'
+import { FooterSidebar, HeaderSidebar, SidebarMain } from '@/components/app'
 import {
   Sidebar,
   SidebarContent,

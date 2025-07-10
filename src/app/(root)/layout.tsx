@@ -1,4 +1,4 @@
-import { AppHeader, AppSidebar } from '@/components/shared'
+import { AppHeader, AppSidebar } from '@/components/app'
 import { SidebarInset, SidebarProvider } from '@/components/ui'
 import { getUserAuthentication } from '@/lib/session'
 
